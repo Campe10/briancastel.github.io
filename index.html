@@ -2,16 +2,104 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mi Página Web</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Galería con frases y video</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 2rem;
+      background-color: #f5f5f5;
+      max-width: 600px;
+      margin: auto;
+    }
+    img {
+      width: 100%;
+      max-width: 400px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+    .controls {
+      margin-top: 1rem;
+    }
+    button {
+      margin: 0 10px;
+      padding: 10px 20px;
+      border: none;
+      background-color: #007bff;
+      color: white;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    #frase {
+      margin-top: 12px;
+      font-size: 1.1rem;
+      color: #333;
+      min-height: 2.5em;
+    }
+    video {
+      margin-top: 30px;
+      max-width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+  </style>
 </head>
 <body>
-  <h1>Hola, soy Brian Castel</h1>
-  <p>Bienvenido a mi página web personal.</p>
-  <button onclick="mostrarImagen()">Mostrar imagen</button>
-  <div id="contenedor-imagen"></div>
+  <h1>Galería de Brian Castel</h1>
+  
+  <img id="galeria" src="https://picsum.photos/id/1011/400/300" alt="Galería de imágenes">
+  <div id="frase">Frase 1: La naturaleza es maravillosa.</div>
 
-  <script src="script.js"></script>
+  <div class="controls">
+    <button onclick="anteriorImagen()">← Anterior</button>
+    <button onclick="siguienteImagen()">Siguiente →</button>
+  </div>
+
+  <video controls>
+    <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+    Tu navegador no soporta video HTML5.
+  </video>
+
+  <script>
+    const imagenes = [
+      "https://picsum.photos/id/1011/400/300",
+      "https://picsum.photos/id/1025/400/300",
+      "https://picsum.photos/id/1035/400/300",
+      "https://picsum.photos/id/1042/400/300"
+    ];
+    
+    const frases = [
+      "Frase 1: La naturaleza es maravillosa.",
+      "Frase 2: Cada día es una nueva oportunidad.",
+      "Frase 3: Nunca dejes de soñar.",
+      "Frase 4: La vida está llena de sorpresas."
+    ];
+
+    let indice = 0;
+    const img = document.getElementById("galeria");
+    const frase = document.getElementById("frase");
+
+    function mostrarImagen() {
+      img.src = imagenes[indice];
+      frase.textContent = frases[indice];
+    }
+
+    function siguienteImagen() {
+      indice = (indice + 1) % imagenes.length;
+      mostrarImagen();
+    }
+
+    function anteriorImagen() {
+      indice = (indice - 1 + imagenes.length) % imagenes.length;
+      mostrarImagen();
+    }
+
+    setInterval(siguienteImagen, 4000); // Cambia cada 4 segundos
+  </script>
 </body>
 </html>
