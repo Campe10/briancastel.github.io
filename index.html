@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Feliz Cumple Mes 💘</title>
+  <style>
+    body {
+      margin: 0;
+      background: #fff0f5;
+      font-family: 'Segoe UI', sans-serif;
+      text-align: center;
+    }
+    h1 {
+      color: #e91e63;
+      font-size: 2em;
+      margin: 20px;
+    }
+    .carrusel {
+      max-width: 90%;
+      margin: 20px auto;
+      overflow: hidden;
+      border-radius: 20px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+    .imagenes {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+      width: 100%;
+    }
+    .imagenes img {
+      width: 100%;
+      border-radius: 20px;
+    }
+    video {
+      margin-top: 30px;
+      max-width: 90%;
+      border-radius: 20px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    }
+  </style>
+</head>
+<body>
+  <h1>💖 Feliz cumple mes mi amor, te amo muchooo 💖</h1>
+
+  <div class="carrusel">
+    <div class="imagenes" id="carruselImagenes">
+      <img src="img/IMG_20240717_160631013_HDR.jpg" alt="Foto 1">
+      <img src="img/IMG_20240818_022531.jpg" alt="Foto 2">
+      <img src="img/IMG_20241124_182957012.jpg" alt="Foto 3">
+      <img src="img/IMG_20241214_205520.jpg" alt="Foto 4">
+      <img src="img/IMG_20241215_232349.jpg" alt="Foto 5">
+      <img src="img/IMG_20250518_172702.jpg" alt="Foto 6">
+    </div>
+  </div>
+
+  <video controls autoplay muted loop>
+    <source src="video/video.mp4" type="video/mp4">
+    Tu navegador no soporta video HTML5.
+  </video>
+
+  <script>
+    let index = 0;
+    const carrusel = document.getElementById('carruselImagenes');
+    const total = carrusel.children.length;
+
+    function mover() {
+      index = (index + 1) % total;
+      carrusel.style.transform = 'translateX(' + (-index * 100) + '%)';
+    }
+
+    setInterval(mover, 4000);
+  </script>
+</body>
+</html>
