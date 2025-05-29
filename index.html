@@ -1,105 +1,109 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Galería con frases y video</title>
+  <meta charset="UTF-8">
+  <title>Feliz cumple mes mi amor 💖</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Arial', sans-serif;
+      background: url('corazones.png') repeat;
+      background-size: contain;
       text-align: center;
-      padding: 2rem;
-      background-color: #f5f5f5;
-      max-width: 600px;
-      margin: auto;
+      padding: 20px;
+    }
+    h1 {
+      color: #d63384;
     }
     img {
-      width: 100%;
+      width: 80%;
       max-width: 400px;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
     }
     .controls {
-      margin-top: 1rem;
+      margin: 20px;
     }
     button {
-      margin: 0 10px;
-      padding: 10px 20px;
-      border: none;
-      background-color: #007bff;
+      background-color: #d63384;
       color: white;
-      font-size: 16px;
-      border-radius: 8px;
+      border: none;
+      padding: 10px 20px;
+      margin: 5px;
+      border-radius: 10px;
       cursor: pointer;
     }
-    button:hover {
-      background-color: #0056b3;
-    }
-    #frase {
-      margin-top: 12px;
-      font-size: 1.1rem;
+    p {
+      font-size: 1.2em;
       color: #333;
-      min-height: 2.5em;
     }
     video {
       margin-top: 30px;
-      max-width: 100%;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      width: 80%;
+      max-width: 500px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    }
+    audio {
+      display: none;
     }
   </style>
 </head>
 <body>
-  <h1>Galería de Brian Castel</h1>
-  
-  <img id="galeria" src="https://picsum.photos/id/1011/400/300" alt="Galería de imágenes">
-  <div id="frase">Frase 1: La naturaleza es maravillosa.</div>
+
+  <h1>Feliz cumple mes mi amor 💖</h1>
+
+  <!-- Imagen principal -->
+  <img id="photo" src="img1.jpg" alt="Foto amor">
+  <p id="caption">Eres la mejor parte de mis días 🥰</p>
 
   <div class="controls">
-    <button onclick="anteriorImagen()">← Anterior</button>
-    <button onclick="siguienteImagen()">Siguiente →</button>
+    <button onclick="prevPhoto()">⬅ Anterior</button>
+    <button onclick="nextPhoto()">Siguiente ➡</button>
   </div>
 
+  <!-- Video -->
   <video controls>
-    <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+    <source src="video.mp4" type="video/mp4">
     Tu navegador no soporta video HTML5.
   </video>
 
+  <!-- Música de fondo -->
+  <audio autoplay loop>
+    <source src="musica.mp3" type="audio/mpeg">
+    Tu navegador no soporta audio HTML5.
+  </audio>
+
   <script>
-    const imagenes = [
-      "https://picsum.photos/id/1011/400/300",
-      "https://picsum.photos/id/1025/400/300",
-      "https://picsum.photos/id/1035/400/300",
-      "https://picsum.photos/id/1042/400/300"
-    ];
-    
-    const frases = [
-      "Frase 1: La naturaleza es maravillosa.",
-      "Frase 2: Cada día es una nueva oportunidad.",
-      "Frase 3: Nunca dejes de soñar.",
-      "Frase 4: La vida está llena de sorpresas."
+    const photos = [
+      { src: "img1.jpg", caption: "Eres la mejor parte de mis días 🥰" },
+      { src: "img2.jpg", caption: "Tu sonrisa ilumina mi mundo 🌟" },
+      { src: "img3.jpg", caption: "Cada momento contigo es mágico ✨" },
+      { src: "img4.jpg", caption: "Gracias por hacerme tan feliz 💕" },
+      { src: "img5.jpg", caption: "Te amo con todo mi corazón ❤️" },
+      { src: "img6.jpg", caption: "Por muchos meses más juntos 💑" },
+      { src: "img7.jpg", caption: "No hay nadie como tú 😍" },
+      { src: "img8.jpg", caption: "Mi lugar favorito es a tu lado 🌹" }
     ];
 
-    let indice = 0;
-    const img = document.getElementById("galeria");
-    const frase = document.getElementById("frase");
+    let current = 0;
 
-    function mostrarImagen() {
-      img.src = imagenes[indice];
-      frase.textContent = frases[indice];
+    function showPhoto(index) {
+      const photo = photos[index];
+      document.getElementById('photo').src = photo.src;
+      document.getElementById('caption').innerText = photo.caption;
     }
 
-    function siguienteImagen() {
-      indice = (indice + 1) % imagenes.length;
-      mostrarImagen();
+    function nextPhoto() {
+      current = (current + 1) % photos.length;
+      showPhoto(current);
     }
 
-    function anteriorImagen() {
-      indice = (indice - 1 + imagenes.length) % imagenes.length;
-      mostrarImagen();
+    function prevPhoto() {
+      current = (current - 1 + photos.length) % photos.length;
+      showPhoto(current);
     }
 
-    setInterval(siguienteImagen, 4000); // Cambia cada 4 segundos
+    showPhoto(current);
   </script>
 </body>
 </html>
