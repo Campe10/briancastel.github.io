@@ -1,109 +1,149 @@
-<!DOCTYPE html>
-<html lang="es">
+html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Feliz cumple mes mi amor 💖</title>
+  <title>Feliz Cumple Mes</title>
   <style>
     body {
-      font-family: 'Arial', sans-serif;
-      background: url('corazones.png') repeat;
-      background-size: contain;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to bottom right, #ffeef2, #e8f0ff);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #d6336c;
       text-align: center;
-      padding: 20px;
+      background-image: url('https://www.transparenttextures.com/patterns/white-wall.png');
     }
-    h1 {
-      color: #d63384;
-    }
-    img {
-      width: 80%;
-      max-width: 400px;
+
+    .container {
+      margin-top: 60px;
+      background: rgba(255, 255, 255, 0.7);
+      padding: 30px;
       border-radius: 20px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      display: inline-block;
     }
+
+    h1 {
+      font-size: 3em;
+      margin-bottom: 0.2em;
+    }
+
+    p {
+      font-size: 1.5em;
+    }
+
+    .carousel {
+      position: relative;
+      max-width: 600px;
+      margin: 40px auto;
+      overflow: hidden;
+      border-radius: 20px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .slides {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+      width: 100%;
+    }
+
+    .slide {
+      min-width: 100%;
+      box-sizing: border-box;
+      position: relative;
+    }
+
+    .slide img {
+      width: 100%;
+      height: auto;
+      border-bottom: 1px solid #fff;
+    }
+
+    .caption {
+      background: rgba(255, 255, 255, 0.8);
+      padding: 15px;
+      font-size: 1.2em;
+    }
+
     .controls {
-      margin: 20px;
+      margin-top: 10px;
     }
-    button {
-      background-color: #d63384;
-      color: white;
+
+    .controls button {
+      background: #fdb1d0;
       border: none;
       padding: 10px 20px;
-      margin: 5px;
+      margin: 0 10px;
       border-radius: 10px;
+      color: white;
+      font-weight: bold;
       cursor: pointer;
+      transition: background 0.3s;
     }
-    p {
-      font-size: 1.2em;
-      color: #333;
+
+    .controls button:hover {
+      background: #e391b6;
     }
-    video {
-      margin-top: 30px;
-      width: 80%;
-      max-width: 500px;
-      border-radius: 20px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.3);
-    }
+
     audio {
       display: none;
     }
   </style>
 </head>
 <body>
-
-  <h1>Feliz cumple mes mi amor 💖</h1>
-
-  <!-- Imagen principal -->
-  <img id="photo" src="img1.jpg" alt="Foto amor">
-  <p id="caption">Eres la mejor parte de mis días 🥰</p>
-
-  <div class="controls">
-    <button onclick="prevPhoto()">⬅ Anterior</button>
-    <button onclick="nextPhoto()">Siguiente ➡</button>
+  <div class="container">
+    <h1>Feliz cumple mes mi amor</h1>
+    <p>Te amo mucho 💖</p>
   </div>
 
-  <!-- Video -->
-  <video controls>
-    <source src="video.mp4" type="video/mp4">
-    Tu navegador no soporta video HTML5.
-  </video>
+  <div class="carousel">
+    <div class="slides" id="slideContainer">
+      <div class="slide">
+        <img src="https://via.placeholder.com/600x400?text=Foto+1" alt="Foto 1">
+        <div class="caption">Ese día fue mágico, como vos 💫</div>
+      </div>
+      <div class="slide">
+        <img src="https://via.placeholder.com/600x400?text=Foto+2" alt="Foto 2">
+        <div class="caption">Nunca dejo de sonreír cuando estoy con vos 😊</div>
+      </div>
+      <div class="slide">
+        <img src="https://via.placeholder.com/600x400?text=Foto+3" alt="Foto 3">
+        <div class="caption">Gracias por tanto amor cada día ❤️</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="controls">
+    <button onclick="prevSlide()">Anterior</button>
+    <button onclick="nextSlide()">Siguiente</button>
+  </div>
 
   <!-- Música de fondo -->
   <audio autoplay loop>
-    <source src="musica.mp3" type="audio/mpeg">
-    Tu navegador no soporta audio HTML5.
+    <source src="https://cdn.pixabay.com/audio/2023/03/07/audio_e5d5b1f1ec.mp3" type="audio/mpeg">
+    Tu navegador no soporta la reproducción de audio.
   </audio>
 
   <script>
-    const photos = [
-      { src: "img1.jpg", caption: "Eres la mejor parte de mis días 🥰" },
-      { src: "img2.jpg", caption: "Tu sonrisa ilumina mi mundo 🌟" },
-      { src: "img3.jpg", caption: "Cada momento contigo es mágico ✨" },
-      { src: "img4.jpg", caption: "Gracias por hacerme tan feliz 💕" },
-      { src: "img5.jpg", caption: "Te amo con todo mi corazón ❤️" },
-      { src: "img6.jpg", caption: "Por muchos meses más juntos 💑" },
-      { src: "img7.jpg", caption: "No hay nadie como tú 😍" },
-      { src: "img8.jpg", caption: "Mi lugar favorito es a tu lado 🌹" }
-    ];
+    let currentIndex = 0;
+    const slides = document.getElementById("slideContainer");
+    const totalSlides = slides.children.length;
 
-    let current = 0;
-
-    function showPhoto(index) {
-      const photo = photos[index];
-      document.getElementById('photo').src = photo.src;
-      document.getElementById('caption').innerText = photo.caption;
+    function updateSlide() {
+      slides.style.transform = `translateX(-${currentIndex * 100}%)`;
     }
 
-    function nextPhoto() {
-      current = (current + 1) % photos.length;
-      showPhoto(current);
+    function nextSlide() {
+      currentIndex = (currentIndex + 1) % totalSlides;
+      updateSlide();
     }
 
-    function prevPhoto() {
-      current = (current - 1 + photos.length) % photos.length;
-      showPhoto(current);
+    function prevSlide() {
+      currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+      updateSlide();
     }
 
-    showPhoto(current);
+    // Cambio automático cada 4 segundos
+    setInterval(nextSlide, 4000);
   </script>
 </body>
 </html>
